@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-mocha-reporter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Improved test reporter for ember-cli-mocha.",
   "homepage": "https://github.com/mmelvin0/ember-cli-mocha-reporter",
   "directories": {
