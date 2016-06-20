@@ -2,6 +2,7 @@
   "name": "ember-cli-mocha-reporter",
   "version": "0.0.1",
   "description": "Improved test reporter for ember-cli-mocha.",
+  "homepage": "https://github.com/mmelvin0/ember-cli-mocha-reporter",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,12 +12,21 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmelvin0/ember-cli-mocha-reporter.git"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": {
+    "name": "Michael Melvin",
+    "email": "mmelvin0@gmail.com"
+  },
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmelvin0/ember-cli-mocha-reporter/issues"
+  },
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
     "ember-cli": "1.13.15",
