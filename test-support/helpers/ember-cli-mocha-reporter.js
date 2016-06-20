@@ -37,7 +37,9 @@ export default class Reporter {
         this.setupEvents(runner);
         this.setupBlanket();
 
-        options.allowUncaught = hasQueryParam('no_try_catch');
+        if (options && hasQueryParam('no_try_catch')) {
+            options.allowUncaught = true;
+        }
     }
 
     setupDOM() {
@@ -312,6 +314,21 @@ export default class Reporter {
         const $title = $blanket.find('.bl-title > .bl-file');
 
         $title.text('Code Coverage');
+
+        // fixme: horrendously ugly workaround for double-escaping happening in
+        // bower_components/blanket/dist/{mocha,qunit}/blanket.js
+        $blanket.find('.bl-source > div').contents().filter(function () {
+            return this.nodeType === 3;
+        }).each(function (index, element) {
+            element.nodeValue = element.nodeValue
+                .replace(/&dollar;/g, '$')
+                .replace(/&grave;/g, '`')
+                .replace(/&apos;/g, "'")
+                .replace(/&quot;/g, '"')
+                .replace(/&gt;/g, '>')
+                .replace(/&lt;/g, '<')
+                .replace(/&amp;/g, '&');
+        });
 
         this.updateHidePassed();
     }
