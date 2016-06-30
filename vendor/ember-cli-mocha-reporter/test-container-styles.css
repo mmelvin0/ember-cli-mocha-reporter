@@ -1,3 +1,6 @@
+html {
+    background: white;
+}
 #ember-testing-container {
     position: fixed;
     background: white;
@@ -9,6 +12,7 @@
     z-index: 101;
     border: 1px solid #ccc;
     transition: right 500ms;
+    transform: translate3d(0, 0, 0); /* create a new context to avoid fixed elements popping out */
 }
 #ember-testing-container:hover {
     right: 0;
