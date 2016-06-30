@@ -50,8 +50,16 @@ export default class Reporter {
         }
 
         $rootNode.append(template);
-
-        $('#test-title').text(document.title);
+        
+        $('#test-title')
+            .text(document.title)
+            .on('click', e => {
+                e.preventDefault();
+                if (Url.queryString("grep")) {
+                    Url.updateSearchParam("grep");
+                    window.location.reload();
+                }
+            });
 
         this.setupCanvas();
 
