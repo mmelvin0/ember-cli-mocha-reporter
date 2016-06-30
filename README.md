@@ -32,7 +32,7 @@ mocha.reporter(Reporter);
 
 ## Credit
 
-Ember CLI addon assembled by [@mmelvin0](https://github.com/mmelvin0).
+Ember CLI addon assembled by [@mmelvin0](https://github.com/mmelvin0) with help of [contributors](https://github.com/mmelvin0/ember-cli-mocha-reporter/graphs/contributors).
 
 Contains code borrowed from:
 
