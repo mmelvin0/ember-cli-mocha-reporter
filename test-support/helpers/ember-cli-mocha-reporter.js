@@ -14,9 +14,8 @@
  * <https://github.com/mmelvin0/ember-cli-mocha-reporter>
  */
 
-/* global $, Date */
-
-import Url from 'npm:urljs';
+/* global $, Date, Url */
+import monkeyPatchMocha from './monkey-patch-mocha';
 
 // apparently Sinon can mess with the Date constructor
 const OriginalDate = Date;
@@ -39,6 +38,7 @@ export default class Reporter {
 
         if (options && hasQueryParam('no_try_catch')) {
             options.allowUncaught = true;
+            monkeyPatchMocha();
         }
     }
 
@@ -470,7 +470,7 @@ function groupDescribes(linter) {
     $suites.each((idx, suite) => {
         let $suite = $(suite);
         let suiteTitle = $suite.find('h1').text();
-        let [ , fileName] = suiteTitle.match(`^${linter} - (.*)$`);
+        let [,fileName] = suiteTitle.match(`^${linter} \\| (.*)$`);
         let $test = $suite.find('.test');
 
         $test.find('.title').text(fileName);
