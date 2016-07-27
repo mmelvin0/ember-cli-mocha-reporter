@@ -50,7 +50,7 @@ export default class Reporter {
         }
 
         $rootNode.append(template);
-        
+
         $('#test-title')
             .text(document.title)
             .on('click', e => {
@@ -249,6 +249,7 @@ export default class Reporter {
         }
 
         groupDescribes('JSHint');
+        groupDescribes('ESLint');
         groupDescribes('JSCS');
     }
 
@@ -478,10 +479,13 @@ function groupDescribes(linter) {
     $suites.each((idx, suite) => {
         let $suite = $(suite);
         let suiteTitle = $suite.find('h1').text();
-        let [,fileName] = suiteTitle.match(`^${linter} \\| (.*)$`);
+        let [,fileName] = suiteTitle.match(`^${linter} [\\|-] (.*)$`);
+
         let $test = $suite.find('.test');
 
         $test.find('.title').text(fileName);
+
+        $test.find('pre:eq(1)').hide();
 
         $linter.find('ul').append($test);
         $suite.remove();
