@@ -15,7 +15,7 @@ ember install ember-cli-mocha-reporter
 Edit your `tests/test-helper.js` to add:
 
 ```javascript
-import { mocha } from 'ember-mocha';
+import { mocha } from 'mocha';
 import Reporter from './helpers/ember-cli-mocha-reporter';
 
 // ...
