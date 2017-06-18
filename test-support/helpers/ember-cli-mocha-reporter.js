@@ -67,7 +67,7 @@ export default class Reporter {
         this.$hidePassed = this.$stats.find('#hide-passed');
 
         this.$hidePassed
-            .attr('checked', /hide_passed/.test(window.location.hash))
+            .attr('checked', /hidepassed/.test(window.location.hash))
             .on('change', () => this.updateHidePassed());
 
         this.updateHidePassed();
@@ -189,7 +189,7 @@ export default class Reporter {
         if (this.$stats.find('#hide-passed').is(':checked')) {
             $('#mocha-report').addClass('hide-passed');
             $('#blanket-main').addClass('hide-passed');
-            window.location.hash = '#hide_passed';
+            window.location.hash = '#hidepassed';
         } else {
             $('#mocha-report').removeClass('hide-passed');
             $('#blanket-main').removeClass('hide-passed');
