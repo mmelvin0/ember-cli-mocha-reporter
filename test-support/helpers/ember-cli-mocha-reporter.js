@@ -14,9 +14,7 @@
  * <https://github.com/mmelvin0/ember-cli-mocha-reporter>
  */
 
-/* global $, Date */
-
-import Url from 'npm:urljs';
+/* global $, Date, Url */
 
 // apparently Sinon can mess with the Date constructor
 const OriginalDate = Date;
@@ -51,7 +49,15 @@ export default class Reporter {
 
         $rootNode.append(template);
 
-        $('#test-title').text(document.title);
+        $('#test-title')
+            .text(document.title)
+            .on('click', e => {
+                e.preventDefault();
+                if (Url.queryString("grep")) {
+                    Url.updateSearchParam("grep");
+                    window.location.reload();
+                }
+            });
 
         this.setupCanvas();
 
@@ -61,7 +67,7 @@ export default class Reporter {
         this.$hidePassed = this.$stats.find('#hide-passed');
 
         this.$hidePassed
-            .attr('checked', /hide_passed/.test(window.location.hash))
+            .attr('checked', /hidepassed/.test(window.location.hash))
             .on('change', () => this.updateHidePassed());
 
         this.updateHidePassed();
@@ -183,7 +189,7 @@ export default class Reporter {
         if (this.$stats.find('#hide-passed').is(':checked')) {
             $('#mocha-report').addClass('hide-passed');
             $('#blanket-main').addClass('hide-passed');
-            window.location.hash = '#hide_passed';
+            window.location.hash = '#hidepassed';
         } else {
             $('#mocha-report').removeClass('hide-passed');
             $('#blanket-main').removeClass('hide-passed');
@@ -241,6 +247,7 @@ export default class Reporter {
         }
 
         groupDescribes('JSHint');
+        groupDescribes('ESLint');
         groupDescribes('JSCS');
     }
 
@@ -470,10 +477,13 @@ function groupDescribes(linter) {
     $suites.each((idx, suite) => {
         let $suite = $(suite);
         let suiteTitle = $suite.find('h1').text();
-        let [ , fileName] = suiteTitle.match(`^${linter} - (.*)$`);
+        let [,fileName] = suiteTitle.match(`^${linter} [\\|-] (.*)$`);
+
         let $test = $suite.find('.test');
 
         $test.find('.title').text(fileName);
+
+        $test.find('pre:eq(1)').hide();
 
         $linter.find('ul').append($test);
         $suite.remove();

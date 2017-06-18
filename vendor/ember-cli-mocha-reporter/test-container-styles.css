@@ -1,21 +1,21 @@
+html {
+    background: white;
+}
 #ember-testing-container {
     position: fixed;
     background: white;
     bottom: 0;
-    right: -620px;
+    right: 0;
     width: 640px;
     height: 384px;
     overflow: auto;
     z-index: 101;
     border: 1px solid #ccc;
-    transition: right 500ms;
+    transition: transform 500ms;
+    transform: translate3d(90%, 0, 0); /* create a new context to avoid fixed elements popping out */
 }
 #ember-testing-container:hover {
-    right: 0;
-}
-#ember-testing {
-    zoom: 50%;
-    height: 100%;
+    transform: translate3d(0, 0, 0);
 }
 #mocha {
     margin: 60px 50px 15px 50px;
@@ -159,4 +159,12 @@ div #blanket-main .bl-error a {
 
 #blanket-main .bl-source span {
     text-align: right;
+}
+
+#mocha .test pre, #mocha .test pre.error {
+    width:      100%;
+    height:     100px;
+    max-height: none;
+    overflow:   auto;
+    resize:     vertical;
 }
